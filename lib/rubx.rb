@@ -1,6 +1,6 @@
-require 'parslet'
-require 'rubx/version'
-require 'rubx/parser'
-
-module ::Rubx
+module Rubx
 end
+
+require 'parslet'
+require 'rubx/parser'
+require 'rubx/version'
