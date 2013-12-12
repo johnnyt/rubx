@@ -6,7 +6,10 @@ README.md
 Rakefile
 lib/rubx.rb
 lib/rubx/parser.rb
+lib/rubx/parser/common.rb
+lib/rubx/parser/query.rb
 lib/rubx/version.rb
 rubx.gemspec
 test/helper.rb
-test/version_test.rb
+test/parser/test_query.rb
+test/test_version.rb
