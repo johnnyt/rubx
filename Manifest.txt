@@ -1,0 +1,12 @@
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE.md
+Manifest.txt
+README.md
+Rakefile
+lib/rubx.rb
+lib/rubx/parser.rb
+lib/rubx/version.rb
+rubx.gemspec
+test/helper.rb
+test/version_test.rb
