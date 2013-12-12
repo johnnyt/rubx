@@ -1,24 +1,43 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rubx/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'rubx'
-  s.version       = Rubx::VERSION
-  s.authors       = ['JohnnyT']
-  s.email         = ['ubergeek3141@gmail.com']
-  s.homepage      = 'https://github.com/johnnyt/rubx'
-  s.summary       = %q{A pure Ruby OLAP application}
-  s.description   = %q{A pure Ruby OLAP application}
-  s.license       = 'MIT'
+  s.name = "rubx"
+  s.version = "0.1.0.20131212111611"
 
-  s.files         = `git ls-files`.split($/)
-  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-  s.require_paths = ['lib']
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.authors = ["JohnnyT"]
+  s.date = "2013-12-12"
+  s.description = "A Multi-Dimensional system in Ruby"
+  s.email = ["ubergeek3141@gmail.com"]
+  s.extra_rdoc_files = ["CHANGELOG.md", "CONTRIBUTING.md", "LICENSE.md", "Manifest.txt", "README.md"]
+  s.files = ["CHANGELOG.md", "CONTRIBUTING.md", "LICENSE.md", "Manifest.txt", "README.md", "Rakefile", "lib/rubx.rb", "lib/rubx/parser.rb", "lib/rubx/version.rb", "rubx.gemspec", "test/helper.rb", "test/version_test.rb", ".gemtest"]
+  s.homepage = "https://github.com/johnnyt/rubx"
+  s.licenses = ["MIT"]
+  s.rdoc_options = ["--main", "README.md"]
+  s.require_paths = ["lib"]
+  s.rubyforge_project = "rubx"
+  s.rubygems_version = "1.8.23"
+  s.summary = "A Multi-Dimensional system in Ruby"
+  s.test_files = ["test/version_test.rb"]
 
-  # Check the Gemfile for test and development dependencies
+  if s.respond_to? :specification_version then
+    s.specification_version = 3
+
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<parslet>, [">= 1.0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 4.0"])
+      s.add_development_dependency(%q<minitest>, [">= 5.0"])
+      s.add_development_dependency(%q<hoe>, ["~> 3.7"])
+    else
+      s.add_dependency(%q<parslet>, [">= 1.0"])
+      s.add_dependency(%q<rdoc>, ["~> 4.0"])
+      s.add_dependency(%q<minitest>, [">= 5.0"])
+      s.add_dependency(%q<hoe>, ["~> 3.7"])
+    end
+  else
+    s.add_dependency(%q<parslet>, [">= 1.0"])
+    s.add_dependency(%q<rdoc>, ["~> 4.0"])
+    s.add_dependency(%q<minitest>, [">= 5.0"])
+    s.add_dependency(%q<hoe>, ["~> 3.7"])
+  end
 end
-
-# vim: syntax=ruby
