@@ -1,0 +1,41 @@
+{
+    "name": "rubx",
+    "description": "Ruby Environment",
+    "version": "0.1.0",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "/*.js",
+        "/*.html",
+        "test",
+        "tests"
+    ],
+    "authors": [
+        {
+            "name": "JohnnyT",
+            "email": "ubergeek3141@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/johnnyt/rubx",
+    "keywords": [
+        "Amber",
+        "Smalltalk"
+    ],
+    "license": [
+        "MIT"
+    ],
+    "private": false,
+    "dependencies": {
+        "amber": "^0.14.14",
+        "amber-contrib-jquery": ">=0.1.0",
+        "amber-contrib-web": ">=0.1.0",
+        "amber-contrib-domite": ">=0.3.1",
+        "materialize": ">=0.97.0",
+        "silk": ">=0.1.3"
+    },
+    "devDependencies": {
+        "amber-contrib-legacy": "^0.2.1",
+        "helios": ">=0.5.0"
+    }
+}
