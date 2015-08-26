@@ -39,3 +39,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Client (Bower, NPM) #
+#######################
+client/bower_components
+client/node_modules
+client/.sass-cache
+
