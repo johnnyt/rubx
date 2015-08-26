@@ -2,8 +2,10 @@
 
 require "rubygems"
 require "json"
+require "multi_json"
 require "rack"
 require "rack_dav"
+require "roar"
 require "sinatra/base"
 require "sinatra/json"
 
