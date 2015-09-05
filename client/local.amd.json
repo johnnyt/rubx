@@ -2,6 +2,6 @@
     "paths": {
         "amber-rubx": "src",
         "hammerjs": "bower_components/materialize/js/hammer.min",
-        "materialize": "bower_components/materialize/dist/js"
+        "materialize": "js"
     }
 }

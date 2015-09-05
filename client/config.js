@@ -12,13 +12,10 @@ require.config({
     "jquery-ui": "bower_components/jquery-ui/jquery-ui",
     "codemirror": "bower_components/codemirror",
     "bootstrap": "bower_components/bootstrap/dist",
-    "mousetrap": "_to_delete_/bower_components/mousetrap/mousetrap",
-    "jquery.blockUI": "_to_delete_/bower_components/blockui/jquery.blockUI",
     "silk": "bower_components/silk/src",
     "helios": "bower_components/helios/src",
     "helios/resources": "bower_components/helios/resources",
     "helios/index": "bower_components/helios/index",
-    "amber-ide-starter-dialog": "_to_delete_/bower_components/amber-ide-starter-dialog/lib/idestarter",
     "amber/web": "bower_components/amber-contrib-web/src",
     "amber/legacy": "bower_components/amber-contrib-legacy/src",
     "amber/legacy/resources": "bower_components/amber-contrib-legacy/resources",
@@ -28,12 +25,11 @@ require.config({
     "amber_core": "bower_components/amber/src",
     "amber-rubx": "src",
     "hammerjs": "bower_components/materialize/js/hammer.min",
-    "materialize": "bower_components/materialize/dist/js"
+    "materialize": "js"
   },
   "shim": {
     "typeahead": {
       "deps": [
-        "jquery",
         "jquery"
       ],
       "exports": "jQuery.fn.typeahead"
@@ -41,23 +37,17 @@ require.config({
     "jquery-ui": {
       "deps": [
         "jquery",
-        "jquery",
-        "jquery",
         "jquery"
       ]
     },
     "codemirror/lib/codemirror": {
       "deps": [
         "css!codemirror/lib/codemirror",
-        "css!codemirror/lib/codemirror",
-        "css!codemirror/lib/codemirror",
         "css!codemirror/lib/codemirror"
       ]
     },
     "bootstrap/js/bootstrap": {
       "deps": [
-        "jquery",
-        "css!bootstrap/css/bootstrap",
         "jquery",
         "css!bootstrap/css/bootstrap"
       ]
