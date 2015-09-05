@@ -6,3 +6,4 @@ end
 
 require "rubx/helpers"
 require "rubx/representers/object_representer"
+require "rubx/version"

@@ -7,6 +7,9 @@ module Rubx
       include Roar::JSON
 
       property :object_id
+      property :class
+      property :to_s
+      property :inspect
     end
   end
 end

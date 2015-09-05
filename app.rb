@@ -1,8 +1,7 @@
-require_relative "lib/rubx"
-
 module Rubx
   class App < Sinatra::Base
     set :public_folder, 'client'
+    disable :logging # Rack adds Rack::CommonLogger in development
     helpers Sinatra::JSON
     helpers Rubx::Helpers
 
