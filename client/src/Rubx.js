@@ -22,12 +22,11 @@ var objId,obj;
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
 $recv(e)._preventDefault();
-objId=$recv(window)._prompt_("Enter ObjectID");
+objId=$recv(window)._prompt_default_("Enter ObjectID","125606401");
 objId;
 obj=$recv($recv($Rubx())._objectSpace())._at_(objId);
 obj;
-$recv(console)._log_(obj);
-return $recv(obj)._inspect();
+return self._renderObject_(obj);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({e:e,objId:objId,obj:obj},$ctx1,1)});
 //>>excludeEnd("ctx");
@@ -39,10 +38,10 @@ return $1;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "lookupObject\x0a\x09^ [:e || objId obj |\x0a\x09\x09e preventDefault.\x0a\x09\x09objId := window prompt: 'Enter ObjectID'.\x0a\x09\x09obj := Rubx objectSpace at: objId.\x0a\x09\x09console log: obj.\x0a\x09\x09obj inspect ]",
+source: "lookupObject\x0a\x09^ [:e || objId obj |\x0a\x09\x09e preventDefault.\x0a\x09\x09objId := window prompt: 'Enter ObjectID' default: '125606401'.\x0a\x09\x09obj := Rubx objectSpace at: objId.\x0a\x09\x09self renderObject: obj ]",
 referencedClasses: ["Rubx"],
 //>>excludeEnd("ide");
-messageSends: ["preventDefault", "prompt:", "at:", "objectSpace", "log:", "inspect"]
+messageSends: ["preventDefault", "prompt:default:", "at:", "objectSpace", "renderObject:"]
 }),
 $globals.RXNavigationWidget);
 
@@ -189,6 +188,65 @@ $globals.RXNavigationWidget);
 
 $core.addMethod(
 $core.method({
+selector: "renderObject:",
+protocol: 'rendering',
+fn: function (anRXObject){
+var self=this;
+var html;
+function $HTMLCanvas(){return $globals.HTMLCanvas||(typeof HTMLCanvas=="undefined"?nil:HTMLCanvas)}
+function $RXObjectCardWidget(){return $globals.RXObjectCardWidget||(typeof RXObjectCardWidget=="undefined"?nil:RXObjectCardWidget)}
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$4,$2;
+html=$recv($HTMLCanvas())._onJQuery_("#content"._asJQuery());
+$1=$recv(html)._div();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["div"]=1;
+//>>excludeEnd("ctx");
+$recv($1)._class_("row");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["class:"]=1;
+//>>excludeEnd("ctx");
+$2=$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$3=$recv(html)._div();
+$recv($3)._class_("col s12 m7");
+$4=$recv($3)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return $recv($recv($RXObjectCardWidget())._newWithObject_(anRXObject))._renderOn_(html);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)});
+//>>excludeEnd("ctx");
+}));
+return $4;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderObject:",{anRXObject:anRXObject,html:html},$globals.RXNavigationWidget)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anRXObject"],
+source: "renderObject: anRXObject\x0a\x09|html|\x0a\x09html := HTMLCanvas onJQuery: '#content' asJQuery.\x0a\x09html\x0a\x09\x09div class: 'row'; with: [\x0a\x09\x09\x09html div class: 'col s12 m7'; with: [\x0a\x09\x09\x09\x09(RXObjectCardWidget newWithObject: anRXObject)\x0a\x09\x09\x09\x09\x09renderOn: html ]]",
+referencedClasses: ["HTMLCanvas", "RXObjectCardWidget"],
+//>>excludeEnd("ide");
+messageSends: ["onJQuery:", "asJQuery", "class:", "div", "with:", "renderOn:", "newWithObject:"]
+}),
+$globals.RXNavigationWidget);
+
+$core.addMethod(
+$core.method({
 selector: "renderOn:",
 protocol: 'rendering',
 fn: function (html){
@@ -196,7 +254,7 @@ var self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$5,$7,$8,$9,$11,$12,$10,$6,$4,$2;
+var $1,$3,$5,$7,$8,$9,$10,$6,$4,$2;
 $1=$recv(html)._div();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["div"]=1;
@@ -254,25 +312,16 @@ self._renderSideNavOn_(html);
 $9=$recv(html)._a();
 $recv($9)._href_("#");
 $recv($9)._class_("button-collapse");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["class:"]=5;
-//>>excludeEnd("ctx");
 $recv($9)._at_put_("data-activates","nav-mobile");
 $10=$recv($9)._with_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx5) {
 //>>excludeEnd("ctx");
-$11=$recv(html)._tag_("i");
-$recv($11)._class_("material-icons");
-$12=$recv($11)._with_("menu");
-return $12;
+return $recv(html)._icon_("menu");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)});
 //>>excludeEnd("ctx");
 }));
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-$ctx4.sendIdx["with:"]=5;
-//>>excludeEnd("ctx");
 return $10;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)});
@@ -304,10 +353,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["html"],
-source: "renderOn: html\x0a\x09html div class: 'navbar-fixed'; with: [\x0a\x09\x09html nav class: 'deep-purple'; at: 'role' put: 'navigation'; with: [\x0a\x09\x09\x09html div class: 'nav-wrapper container'; with: [\x0a\x09\x09\x09\x09html a id: 'logo-container'; href: '#'; class: 'brand-logo'; with: 'Rubx'.\x0a\x09\x09\x09\x09self renderNavOn: html.\x0a\x09\x09\x09\x09self renderSideNavOn: html.\x0a\x09\x09\x09\x09\x22self renderSearchOn: html.\x22\x0a\x09\x09\x09\x09html a href: '#'; class: 'button-collapse'; at: 'data-activates' put: 'nav-mobile'; with: [\x0a\x09\x09\x09\x09\x09(html tag: 'i') class: 'material-icons'; with: 'menu' ]]]]",
+source: "renderOn: html\x0a\x09html div class: 'navbar-fixed'; with: [\x0a\x09\x09html nav class: 'deep-purple'; at: 'role' put: 'navigation'; with: [\x0a\x09\x09\x09html div class: 'nav-wrapper container'; with: [\x0a\x09\x09\x09\x09html a id: 'logo-container'; href: '#'; class: 'brand-logo'; with: 'Rubx'.\x0a\x09\x09\x09\x09self renderNavOn: html.\x0a\x09\x09\x09\x09self renderSideNavOn: html.\x0a\x09\x09\x09\x09\x22self renderSearchOn: html.\x22\x0a\x09\x09\x09\x09html a href: '#'; class: 'button-collapse'; at: 'data-activates' put: 'nav-mobile'; with: [\x0a\x09\x09\x09\x09\x09html icon: 'menu' ]]]]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["class:", "div", "with:", "nav", "at:put:", "id:", "a", "href:", "renderNavOn:", "renderSideNavOn:", "tag:"]
+messageSends: ["class:", "div", "with:", "nav", "at:put:", "id:", "a", "href:", "renderNavOn:", "renderSideNavOn:", "icon:"]
 }),
 $globals.RXNavigationWidget);
 
@@ -419,7 +468,27 @@ $globals.RXNavigationWidget);
 
 
 
-$core.addClass('RXObject', $globals.Object, ['objectId', 'klass'], 'Rubx');
+$core.addClass('RXObject', $globals.Object, ['objectId', 'klass', 'inspection', 'string'], 'Rubx');
+$core.addMethod(
+$core.method({
+selector: "inspection",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@inspection"];
+return $1;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "inspection\x0a\x09^ inspection",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.RXObject);
+
 $core.addMethod(
 $core.method({
 selector: "klass",
@@ -474,6 +543,14 @@ self["@objectId"]=$recv(json)._at_("object_id");
 $ctx1.sendIdx["at:"]=1;
 //>>excludeEnd("ctx");
 self["@klass"]=$recv(json)._at_("class");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["at:"]=2;
+//>>excludeEnd("ctx");
+self["@string"]=$recv(json)._at_("to_s");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["at:"]=3;
+//>>excludeEnd("ctx");
+self["@inspection"]=$recv(json)._at_("inspect");
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"parseJSON:",{json:json},$globals.RXObject)});
@@ -481,10 +558,30 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["json"],
-source: "parseJSON: json\x0a\x09\x22self isLoaded \x0a\x09\x09ifNil: [isLoaded := false].\x22\x0a\x09objectId := json at: 'object_id'.\x0a\x09klass := json at: 'class'.\x0a\x22\x09to_s := json to_s.\x0a\x09inspect: json inspect.\x22",
+source: "parseJSON: json\x0a\x09\x22self isLoaded \x0a\x09\x09ifNil: [isLoaded := false].\x22\x0a\x09objectId := json at: 'object_id'.\x0a\x09klass := json at: 'class'.\x0a\x09string := json at: 'to_s'.\x0a\x09inspection := json at: 'inspect'.",
 referencedClasses: [],
 //>>excludeEnd("ide");
 messageSends: ["at:"]
+}),
+$globals.RXObject);
+
+$core.addMethod(
+$core.method({
+selector: "string",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@string"];
+return $1;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "string\x0a\x09^ string",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
 }),
 $globals.RXObject);
 
@@ -547,6 +644,186 @@ referencedClasses: [],
 messageSends: ["new", "parseJSON:", "yourself"]
 }),
 $globals.RXObject.klass);
+
+
+$core.addClass('RXObjectCardWidget', $globals.Widget, ['container', 'object'], 'Rubx');
+$core.addMethod(
+$core.method({
+selector: "object",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@object"];
+return $1;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "object\x0a\x09^ object",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.RXObjectCardWidget);
+
+$core.addMethod(
+$core.method({
+selector: "object:",
+protocol: 'accessing',
+fn: function (anRXObject){
+var self=this;
+self["@object"]=anRXObject;
+return self;
+
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anRXObject"],
+source: "object: anRXObject\x0a\x09object := anRXObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: []
+}),
+$globals.RXObjectCardWidget);
+
+$core.addMethod(
+$core.method({
+selector: "renderObjectOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2;
+$1=$recv(html)._a();
+$recv($1)._href_("#close");
+$recv($1)._class_("right");
+$recv($1)._onClick_((function(e){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$recv(e)._preventDefault();
+return $recv($recv(self["@container"])._asJQuery())._remove();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({e:e},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+$2=$recv($1)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $recv(html)._icon_("highlight_off");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+$recv(html)._h4_($recv(self["@object"])._klass());
+$recv(html)._p_($recv(self["@object"])._inspection());
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderObjectOn:",{html:html},$globals.RXObjectCardWidget)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderObjectOn: html\x0a\x09html a href: '#close';\x0a\x09\x09class: 'right';\x0a\x09\x09onClick: [:e|e preventDefault.\x0a\x09\x09\x09container asJQuery remove ];\x0a\x09\x09with: [\x0a\x09\x09\x09html icon: 'highlight_off' ].\x0a\x09html h4: object klass.\x0a\x09html p: object inspection.",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["href:", "a", "class:", "onClick:", "preventDefault", "remove", "asJQuery", "with:", "icon:", "h4:", "klass", "p:", "inspection"]
+}),
+$globals.RXObjectCardWidget);
+
+$core.addMethod(
+$core.method({
+selector: "renderOn:",
+protocol: 'rendering',
+fn: function (html){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$2,$4,$5,$3,$receiver;
+$1=self["@container"];
+if(($receiver = $1) == null || $receiver.isNil){
+self["@container"]=$recv(html)._div();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["div"]=1;
+//>>excludeEnd("ctx");
+self["@container"];
+} else {
+$1;
+};
+$2=self["@container"];
+$recv($2)._class_("card");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["class:"]=1;
+//>>excludeEnd("ctx");
+$3=$recv($2)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+$4=$recv(html)._div();
+$recv($4)._class_("card-content");
+$5=$recv($4)._with_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx3) {
+//>>excludeEnd("ctx");
+return self._renderObjectOn_(html);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)});
+//>>excludeEnd("ctx");
+}));
+return $5;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)});
+//>>excludeEnd("ctx");
+}));
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["with:"]=1;
+//>>excludeEnd("ctx");
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},$globals.RXObjectCardWidget)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["html"],
+source: "renderOn: html\x0a\x09container ifNil: [\x0a\x09\x09container := html div ].\x0a\x09container\x0a\x09\x09class: 'card';\x0a\x09\x09with: [\x0a\x09\x09\x09html div class: 'card-content'; with: [\x0a\x09\x09\x09\x09self renderObjectOn: html ]]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["ifNil:", "div", "class:", "with:", "renderObjectOn:"]
+}),
+$globals.RXObjectCardWidget);
+
+
+$core.addMethod(
+$core.method({
+selector: "newWithObject:",
+protocol: 'instance creation',
+fn: function (aRXObject){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$3,$1;
+$2=self._new();
+$recv($2)._object_(aRXObject);
+$3=$recv($2)._yourself();
+$1=$3;
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"newWithObject:",{aRXObject:aRXObject},$globals.RXObjectCardWidget.klass)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aRXObject"],
+source: "newWithObject: aRXObject\x0a\x09^ self new\x0a\x09\x09object: aRXObject;\x0a\x09\x09yourself",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["object:", "new", "yourself"]
+}),
+$globals.RXObjectCardWidget.klass);
 
 
 $core.addClass('RXObjectSpace', $globals.Object, ['objects'], 'Rubx');
@@ -827,5 +1104,33 @@ referencedClasses: [],
 messageSends: ["start", "new"]
 }),
 $globals.Rubx.klass);
+
+$core.addMethod(
+$core.method({
+selector: "icon:",
+protocol: '*Rubx',
+fn: function (aString){
+var self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $2,$3,$1;
+$2=self._tag_("i");
+$recv($2)._class_("material-icons");
+$3=$recv($2)._with_(aString);
+$1=$3;
+return $1;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"icon:",{aString:aString},$globals.HTMLCanvas)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "icon: aString\x0a\x09^ (self tag: 'i')\x0a\x09\x09class: 'material-icons';\x0a\x09\x09with: aString",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["class:", "tag:", "with:"]
+}),
+$globals.HTMLCanvas);
 
 });

@@ -8,10 +8,9 @@ Widget subclass: #RXNavigationWidget
 lookupObject
 	^ [:e || objId obj |
 		e preventDefault.
-		objId := window prompt: 'Enter ObjectID'.
+		objId := window prompt: 'Enter ObjectID' default: '125606401'.
 		obj := Rubx objectSpace at: objId.
-		console log: obj.
-		obj inspect ]
+		self renderObject: obj ]
 !
 
 openIde
@@ -38,6 +37,16 @@ renderNavOn: html
 		self renderNavLinksOn: html ]
 !
 
+renderObject: anRXObject
+	|html|
+	html := HTMLCanvas onJQuery: '#content' asJQuery.
+	html
+		div class: 'row'; with: [
+			html div class: 'col s12 m7'; with: [
+				(RXObjectCardWidget newWithObject: anRXObject)
+					renderOn: html ]]
+!
+
 renderOn: html
 	html div class: 'navbar-fixed'; with: [
 		html nav class: 'deep-purple'; at: 'role' put: 'navigation'; with: [
@@ -47,7 +56,7 @@ renderOn: html
 				self renderSideNavOn: html.
 				"self renderSearchOn: html."
 				html a href: '#'; class: 'button-collapse'; at: 'data-activates' put: 'nav-mobile'; with: [
-					(html tag: 'i') class: 'material-icons'; with: 'menu' ]]]]
+					html icon: 'menu' ]]]]
 !
 
 renderSearchOn: html
@@ -64,10 +73,14 @@ renderSideNavOn: html
 ! !
 
 Object subclass: #RXObject
-	instanceVariableNames: 'objectId klass'
+	instanceVariableNames: 'objectId klass inspection string'
 	package: 'Rubx'!
 
 !RXObject methodsFor: 'accessing'!
+
+inspection
+	^ inspection
+!
 
 klass
 	^ klass
@@ -75,6 +88,10 @@ klass
 
 objectId
 	^ objectId
+!
+
+string
+	^ string
 ! !
 
 !RXObject methodsFor: 'initialization'!
@@ -84,8 +101,8 @@ parseJSON: json
 		ifNil: [isLoaded := false]."
 	objectId := json at: 'object_id'.
 	klass := json at: 'class'.
-"	to_s := json to_s.
-	inspect: json inspect."
+	string := json at: 'to_s'.
+	inspection := json at: 'inspect'.
 ! !
 
 !RXObject class methodsFor: 'instance creation'!
@@ -105,6 +122,51 @@ parseJSON: json
 	json loaded
 		ifTrue: [^ object parseJSON: json; yourself]
 		ifFalse: [^ object parseJSONNotLoaded: json; yourself]."
+! !
+
+Widget subclass: #RXObjectCardWidget
+	instanceVariableNames: 'container object'
+	package: 'Rubx'!
+
+!RXObjectCardWidget methodsFor: 'accessing'!
+
+object
+	^ object
+!
+
+object: anRXObject
+	object := anRXObject
+! !
+
+!RXObjectCardWidget methodsFor: 'rendering'!
+
+renderObjectOn: html
+	html a href: '#close';
+		class: 'right';
+		onClick: [:e|e preventDefault.
+			container asJQuery remove ];
+		with: [
+			html icon: 'highlight_off' ].
+	html h4: object klass.
+	html p: object inspection.
+!
+
+renderOn: html
+	container ifNil: [
+		container := html div ].
+	container
+		class: 'card';
+		with: [
+			html div class: 'card-content'; with: [
+				self renderObjectOn: html ]]
+! !
+
+!RXObjectCardWidget class methodsFor: 'instance creation'!
+
+newWithObject: aRXObject
+	^ self new
+		object: aRXObject;
+		yourself
 ! !
 
 Object subclass: #RXObjectSpace
@@ -179,5 +241,13 @@ ajax: aString data: data
 
 start
 	self new start
+! !
+
+!HTMLCanvas methodsFor: '*Rubx'!
+
+icon: aString
+	^ (self tag: 'i')
+		class: 'material-icons';
+		with: aString
 ! !
 
